@@ -8,12 +8,11 @@ int main(){
 	for(int i=0;i<n;i++){
 		scanf("%d",&arr[i]);
 	}
+        printf("Unique values in the array: ");
 	for(int i=0;i<n;i++){
 		int same=1;
 		for(int j=0;j<n;j++){
-			if(i!=j&&
-			
-			arr[i]==arr[j]){
+			if(i!=j && arr[i]==arr[j]){
 				same=0;
 				break;
 			}
