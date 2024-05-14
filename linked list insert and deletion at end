@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node *link;
+};
+struct node *head=NULL;
+void insert(int value){
+	struct node *newnode=(struct node*)malloc(sizeof(struct node*));
+	newnode->data=value;
+	newnode->link=NULL;
+	if(head==NULL){
+		head=newnode;
+	}
+	else{
+		struct node *p=head;
+		while(p->link!=NULL){
+			p=p->link;
+		}
+		p->link=newnode;
+	}
+	printf("\nValue inserted succesfully\n");
+}
+void del(){
+	if(head==NULL){
+		printf("List is Empty: ");
+		
+	}else if(head->link==NULL) 
+	{
+		struct node* p = head;
+		head = p->link;
+		free(p);
+	}
+	else{
+		struct node *p=head;
+		struct node *pre=NULL;
+		while(p->link!=NULL){
+			pre=p;
+			p=p->link;
+		}
+		pre->link=NULL;
+		free(p);
+		printf("\nValue deleted sucessfully\n");
+	}
+}
+void display(){
+	struct node *p=head;
+	printf("List: ");
+	while(p!=NULL){
+		printf("%d,",p->data);
+		p=p->link;
+	}
+	printf("\n");
+}
+
+
+int main(){
+	while(1){
+	int option;
+	printf("Enter the number \n1)insert \n2) delete \n3)display \n4)quit or exit\n");
+	scanf("%d",&option);
+	if(option==1){
+			int value;
+			printf("\nEnter the number: ");
+			scanf("%d",&value);
+			insert(value);
+		}
+	else if(option==2){
+		del();
+	}
+	else if(option==3)
+			display();
+	else if(option==4){
+		break;}
+		else{
+			printf("You entered wrong option");
+			
+		}
+	
+
+}}
+
