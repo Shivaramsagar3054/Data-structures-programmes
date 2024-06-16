@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 10
+typedef struct Node {
+    int key;
+    struct Node* next;
+} Node;
+typedef struct HashTable {
+    Node** table;
+    int size;
+} HashTable;
+void initialize(HashTable* table, int size) {
+    table->size = size;
+    table->table = (Node**)malloc(size * sizeof(Node*));
+    for (int i = 0; i < size; i++) {
+        table->table[i] = NULL;
+    }
+}
+int hash(int key, int size) {
+    return key % size;
+}
+void insert(HashTable* table, int key, int value) {
+    int index = hash(key, table->size);
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->key = key;
+    newNode->next = table->table[index];
+    table->table[index] = newNode;
+}
+void display(HashTable* table) {
+    for (int i = 0; i < table->size; i++) {
+        printf("[%d] -> ", i);
+        Node* temp = table->table[i];
+        while (temp != NULL) {
+            printf("%d -> ", temp->key);
+            temp = temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+int main() {
+    HashTable table;
+    initialize(&table, SIZE);
+    insert(&table, 5, 10);
+    insert(&table, 15, 20);
+    insert(&table, 25, 30);
+    insert(&table, 35, 40);
+    insert(&table, 6, 60);
+    insert(&table, 16, 70);
+    insert(&table, 26, 80);
+    insert(&table, 36, 90);
+    display(&table);
+    return 0;
+}
