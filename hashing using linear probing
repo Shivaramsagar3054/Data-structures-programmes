@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TABLE_SIZE 10
+int hashTable[TABLE_SIZE];
+void init() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        hashTable[i] = -1; 
+    }
+}
+int hash(int key) {
+    return key % TABLE_SIZE;
+}
+void insert(int key) {
+    int index = hash(key);
+    while (hashTable[index] != -1) {
+        index = (index + 1) % TABLE_SIZE;
+    }   
+    hashTable[index] = key;
+}
+int search(int key) {
+    int index = hash(key);
+    while (hashTable[index] != -1) {
+        if (hashTable[index] == key) {
+            return index; 
+        }
+        index = (index + 1) % TABLE_SIZE;
+    }
+    return -1;
+}
+int main() {
+    init();
+    insert(10);
+    insert(20);
+    insert(30);
+    insert(40);
+    printf("Value found at index %d\n", search(30));
+    printf("Value found at index %d\n", search(50));
+    return 0;
+}
