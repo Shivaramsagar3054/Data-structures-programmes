@@ -1,10 +1,11 @@
 #include<stdio.h>
+#include<stdlib.h>
 int pivotOf(int arr[],int low,int high){
 	int pivot=arr[low];
-	int i=low;
+	int i=low+1;
 	int j=high;
-	if(i<j){
-		while(arr[i]<=pivot){
+	while(i<=j){
+		while(i<=high && arr[i]<=pivot){
 			i++;
 		}
 		while(arr[j]>pivot){
